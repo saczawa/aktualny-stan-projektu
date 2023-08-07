@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#740001</color> <!-- Gryffindor red -->
+    <color name="colorPrimaryDark">#5c0002</color> <!-- Darker Gryffindor red -->
+    <color name="colorAccent">#ffc107</color> <!-- Gold -->
+    <color name="cardBackground">#f2f2f2</color> <!-- Light gray -->
+    <color name="correct">#00FF00</color>
+    <color name="incorrect">#FF0000</color>
+    <color name="underline">#D8D6D6</color>
+
+</resources>
