@@ -19,8 +19,15 @@ import kotlinx.coroutines.launch
 import java.time.DayOfWeek
 import java.time.LocalDateTime
 import java.time.LocalTime
+import androidx.room.AutoMigration
 
-@Database(entities = [Student::class], version = 1)
+@Database(
+    entities = [Student::class],
+    version = 2,
+    autoMigrations = [
+        AutoMigration(from = 1, to = 2)
+    ]
+)
 @TypeConverters(LocalDateTimeConverter::class, GenderConverter::class,
     DayOfWeekConverter::class, LocalTimeConverter::class)
 abstract class  MyApplicationRoomDatabase : RoomDatabase() {
