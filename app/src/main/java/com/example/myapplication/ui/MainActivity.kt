@@ -32,39 +32,25 @@ import com.example.myapplication.ui.plan.PlanScreen
 
 class MainActivity : ComponentActivity() {
 
-    private val db by lazy {
-        Room.databaseBuilder(
-            applicationContext,
-            MyApplicationRoomDatabase::class.java,
-            "myapplication_database.db"
-        ).build()
-    }
-    private val viewModel by viewModels<StudentViewModel>(
-        factoryProducer = {
-            object : ViewModelProvider.Factory {
-                override fun <T : ViewModel> create(modelClass: Class<T>): T {
-                    return StudentViewModel(db.studentDao()) as T
-                }
-            }
-        }
-    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            MyApplicationTheme {
-                val state by viewModel.state.collectAsState()
-
-            }
+            MyApplicationTheme(dynamicColor = false) {
+                // A surface container using the 'background' color from the theme
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colorScheme.background
+                ) {
                     BuildNavigationGraph()
                 }
             }
         }
+    }
+}
 
 @Composable
-private fun BuildNavigationGraph(
-    studentViewModel: StudentViewModel = viewModel()
-) {
+private fun BuildNavigationGraph() {
     // The NavController is in a place where all
     // our composables can access it.
     val navController = rememberNavController()
@@ -79,10 +65,17 @@ private fun BuildNavigationGraph(
         startDestination = Screen.Plan.route
     ) {
         composable(Screen.Plan.route) { PlanScreen(navController) }
-        composable(Screen.Student.route) { StudentScreen(navController)
-        } }
-//        composable(Screen.Login.route) { LoginScreen(navController) }
+        composable(Screen.Student.route) { StudentScreen(navController) }
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun DefaultPreview() {
+    MyApplicationTheme(dynamicColor = false) {
+        BuildNavigationGraph()
+    }
+}
 
 //
 //    private lateinit var binding: ActivityMainBinding

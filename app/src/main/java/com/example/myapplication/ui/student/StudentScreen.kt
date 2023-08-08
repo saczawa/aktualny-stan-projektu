@@ -26,7 +26,7 @@ import com.example.myapplication.SortType
 import com.example.myapplication.StudentEvent
 import com.example.myapplication.StudentState
 import com.example.myapplication.components.TopLevelScaffold
-import com.example.myapplication.model.StudentViewModel
+//import com.example.myapplication.model.StudentViewModel
 import com.example.myapplication.ui.theme.MyApplicationTheme
 
 @Composable
@@ -43,7 +43,7 @@ fun StudentScreen(
                 .fillMaxSize()
         ) {
             Text(
-                text = "Cats Screen",
+                text = "Student Screen",
                 modifier = Modifier.padding(start = 8.dp)
             )
         }
@@ -52,7 +52,7 @@ fun StudentScreen(
 
 @Preview
 @Composable
-private fun CatsScreenPreview() {
+private fun StudentScreenPreview() {
     val navController = rememberNavController()
     MyApplicationTheme(dynamicColor = false) {
         StudentScreen(navController)
