@@ -1,7 +1,10 @@
 package com.example.myapplication.model
 
+import androidx.compose.runtime.Composable
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavHostController
 import com.example.myapplication.SortType
 import com.example.myapplication.StudentEvent
 import com.example.myapplication.StudentState

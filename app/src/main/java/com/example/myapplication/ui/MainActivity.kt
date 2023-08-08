@@ -5,14 +5,29 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.runtime.Composable
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.compose.rememberNavController
 import androidx.room.Room
 import com.example.myapplication.datasource.MyApplicationRoomDatabase
 import com.example.myapplication.model.StudentViewModel
 import androidx.compose.runtime.collectAsState
-import com.example.myapplication.ui.student.StudentsScreen
+//import com.example.myapplication.ui.student.PlanScreenTopLevel
+import com.example.myapplication.ui.student.StudentScreen
 import androidx.compose.runtime.getValue
+import com.example.myapplication.ui.theme.MyApplicationTheme
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.Modifier
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.lifecycle.viewmodel.viewModelFactory
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import com.example.myapplication.navigation.Screen
+import com.example.myapplication.ui.plan.PlanScreen
 
 
 class MainActivity : ComponentActivity() {
@@ -37,13 +52,38 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            RoomGuideAndroidTheme {
+            MyApplicationTheme {
                 val state by viewModel.state.collectAsState()
-                StudentsScreen(state = state, onEvent = viewModel::onEvent)
+
+            }
+                    BuildNavigationGraph()
+                }
             }
         }
+
+@Composable
+private fun BuildNavigationGraph(
+    studentViewModel: StudentViewModel = viewModel()
+) {
+    // The NavController is in a place where all
+    // our composables can access it.
+    val navController = rememberNavController()
+
+    // Each NavController is associated with a NavHost.
+    // This links the NavController with a navigation graph.
+    // As we navigate between composables the content of
+    // the NavHost is automatically recomposed.
+    // Each composable destination in the graph is associated with a route.
+    NavHost(
+        navController = navController,
+        startDestination = Screen.Plan.route
+    ) {
+        composable(Screen.Plan.route) { PlanScreen(navController) }
+        composable(Screen.Student.route) { StudentScreen(navController)
+        } }
+//        composable(Screen.Login.route) { LoginScreen(navController) }
     }
-}
+
 //
 //    private lateinit var binding: ActivityMainBinding
 //

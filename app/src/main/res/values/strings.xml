@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Panda School</string>
+    <string name="app_name">eTutoring</string>
     <string name="nav_fragment1">Study</string>
     <string name="nav_fragment2">Dictionary</string>
 
@@ -53,6 +53,7 @@
     <string name="fragmentPlan">Plan</string>
     <string name="student">Student</string>
     <string name="Student">student</string>
+    <string name="nav_drawer_menu">Navigation drawer menu</string>
 
     <string-array name="languages">
         <item>English</item>
